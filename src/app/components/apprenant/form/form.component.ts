@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { Question } from '../../../interfaces/model';
-
+import { ApprenantService } from '../../../services/apprenants/apprenant.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import { Data, Model } from '../../../interfaces/model';
+import { TestService } from '../../../services/test.service';
+import { tap } from 'rxjs';
 
 interface Answer {
   text: string;
@@ -23,10 +27,7 @@ interface Question {
   styleUrl: './form.component.css'
 })
 
-
 export class FormComponent implements OnInit {
-
-  open: boolean = false;
 
   // Tableau de questions
   questions: Question[] = [
@@ -132,6 +133,9 @@ export class FormComponent implements OnInit {
   currentQuestion = 0;
   remainingAnswers: Answer[] = [...this.questions[this.currentQuestion].answers];
   remainingPoints = [6, 3, 1, 0]; // Liste des points restants
+  displayColorCharacteristics: boolean = false;
+  showResultsModal: boolean = false; // Indicateur pour afficher la modal
+  message: string = "";
   // Scores pour chaque couleur
   scores: { [key: string]: number } = {
     red: 0,
@@ -139,107 +143,158 @@ export class FormComponent implements OnInit {
     green: 0,
     blue: 0
   };
+  open: boolean = false;
+  testStarted: boolean = false; // Nouvelle variable pour gérer l'affichage du test
+  token: string = "";
 
-  constructor() { }
+  constructor(private service: ApprenantService, private test: TestService) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem("token")!;
   }
 
   openModal() {
-    console.log("bonjour");
-    this.open = true
+    this.open = true;
+    // Affiche les caractéristiques après la fermeture du modal
+  }
+
+  // Fermer la modal
+  closeModal() {
+    this.showResultsModal = false;
+    this.displayColorCharacteristics = true;
+  }
+
+  // Fonction pour démarrer le test
+  startTest() {
+    this.testStarted = true; // Change l'état pour afficher le test
   }
 
 
-
-  selectedScore: number | null = null;
-
-  // Fonction pour gérer le choix du score
-  selectScore(points: number) {
-    const currentAnswer = this.questions[this.currentQuestionIndex].answers[this.currentAnswerIndex];
-
+  // Fonction pour soumettre la réponse sélectionnée
+  submitAnswer(points: number, answer: Answer) {
     // Ajouter les points au score de la couleur
-    this.scores[currentAnswer.color] += points;
+    this.scores[answer.color] += points;
+    // Retirer la réponse et le point sélectionnés
+    this.remainingAnswers = this.remainingAnswers.filter(a => a !== answer);
+    this.remainingPoints = this.remainingPoints.filter(p => p !== points);
 
-    // Enlever le point sélectionné des points disponibles
-    this.availablePoints = this.availablePoints.filter(p => p !== points);
-
-    // Si toutes les options ont été utilisées pour cette réponse
-    if (this.availablePoints.length === 0) {
-      // Réinitialiser les options de points
-      this.availablePoints = [6, 3, 1, 0];
-
-      // Passer à la réponse suivante
-      this.currentAnswerIndex++;
-    }
-
-    // Si toutes les réponses ont été traitées pour cette question
-    if (this.currentAnswerIndex >= this.questions[this.currentQuestionIndex].answers.length) {
-      // Passer à la question suivante
-      this.currentAnswerIndex = 0; // Réinitialiser l'index de réponse
+    // Si toutes les réponses sont éliminées, passer à la question suivante
+    if (this.remainingAnswers.length === 0 || this.remainingPoints.length === 0) {
       this.currentQuestionIndex++;
-    }
-  }
-
-  // Fonction pour calculer le score total en pourcentage
-  calculateTotalScore() {
-    const scoresValues = Object.values(this.scores) as number[];  // Assurez-vous que les valeurs sont des nombres
-    const totalPoints = scoresValues.reduce((acc: number, val: number) => acc + val, 0);
-    return (totalPoints / (this.questions.length * 6)) * 100; // Le maximum de points est 6 par question
-  }
-
-
-  // Fonction pour trouver la couleur ayant le plus de points
-  getHighestScore() {
-    const highestColor = Object.keys(this.scores).reduce((a, b) => this.scores[a] > this.scores[b] ? a : b);
-    return `La couleur avec le plus de points est ${highestColor} avec ${this.scores[highestColor]} points.`;
-  }
-  // Obtenir la couleur avec le score le plus élevé
-  getHighestScoreColor() {
-    let highestColor = '';
-    let highestPoints = 0;
-
-    for (const color in this.scores) {
-      const points = this.scores[color];
-      console.log(`Couleur: ${color}, Points: ${points}`);
-
-      if (points > highestPoints) {
-        highestPoints = points;
-        highestColor = color;
+      if (this.currentQuestionIndex < this.questions.length) {
+        // Réinitialiser les réponses et points pour la prochaine question
+        this.remainingAnswers = [...this.questions[this.currentQuestionIndex].answers];
+        this.remainingPoints = [6, 3, 1, 0];
+      } else {
+        this.showResultsModal = true; // Afficher la modal avec les résultats
       }
     }
+  }
 
-    console.log(`La couleur avec le plus grand nombre de points est : ${highestColor} avec ${highestPoints} points.`);
+  // Calcul du score total en pourcentage
+  calculateTotalScore(): number {
+    const totalPoints = Object.values(this.scores).reduce((acc, val) => acc + val, 0);
+    return (totalPoints / (this.questions.length * 6)) * 100;
+  }
 
+  calculateTotalColorScore(): number {
+    return this.scores['red'] + this.scores['yellow'] + this.scores['green'] + this.scores['blue'];
+  }
+
+  // Fonction pour obtenir la couleur avec le plus de points
+  getHighestScoreColor() {
+    const highestColor = Object.keys(this.scores).reduce((a, b) => this.scores[a] > this.scores[b] ? a : b);
+    return highestColor;
+  }
+
+  // Afficher les résultats après le test
+  showResults() {
+    this.showResultsModal = true; // Activer la modal pour afficher les résultats
+  }
+
+  //afficher le cercle et ces couleurs
+  getCircleStyle() {
+    const totalPoints = this.scores['red'] + this.scores['yellow'] + this.scores['green'] + this.scores['blue'];
+    // Calcule les pourcentages basés sur les scores respectifs
+    const redPercentage = (this.scores['red'] / totalPoints) * 100;
+    const yellowPercentage = (this.scores['yellow'] / totalPoints) * 100;
+    const greenPercentage = (this.scores['green'] / totalPoints) * 100;
+    const bluePercentage = (this.scores['blue'] / totalPoints) * 100;
+    // Retourne les styles pour `conic-gradient`
     return {
-      highestColor,
-      highestPoints
+      'background': `conic-gradient(
+      red 0% ${redPercentage}%,
+      yellow ${redPercentage}% ${redPercentage + yellowPercentage}%,
+      green ${redPercentage + yellowPercentage}% ${redPercentage + yellowPercentage + greenPercentage}%,
+      blue ${redPercentage + yellowPercentage + greenPercentage}% 100%
+    )`
     };
   }
 
-  // Cette fonction est appelée à chaque sélection de réponse
-  submitAnswer(points: number, answer: Answer) {
-    // Mettre à jour le score en fonction de la couleur de la réponse sélectionnée
-    this.scores[answer.color] += points;
-
-    // Retirer la réponse sélectionnée
-    this.remainingAnswers = this.remainingAnswers.filter(a => a !== answer);
-
-    // Retirer le point sélectionné de la liste des points restants
-    this.remainingPoints = this.remainingPoints.filter(p => p !== points);
-
-    // Si toutes les réponses de cette question sont éliminées, passer à la question suivante
-    if (this.remainingAnswers.length === 0 || this.remainingPoints.length === 0) {
-      this.currentQuestion++;
-      if (this.currentQuestion < this.questions.length) {
-        // Réinitialiser les réponses et les points pour la question suivante
-        this.remainingAnswers = [...this.questions[this.currentQuestion].answers];
-        this.remainingPoints = [6, 3, 1, 0];
+  // Style pour afficher le nom de la couleur sur le disque
+  getColorLabelStyle(color: string, label: string) {
+    return {
+      'position': 'absolute',
+      'font-size': '12px',
+      'font-weight': 'bold',
+      'color': color
+    };
+  }
+  // Calculer les pourcentages basés sur les scores
+  calculatePercentages() {
+    const totalPoints = this.scores['red'] + this.scores['yellow'] + this.scores['green'] + this.scores['blue'];
+    return {
+      red: (this.scores['red'] / totalPoints) * 100,
+      yellow: (this.scores['yellow'] / totalPoints) * 100,
+      green: (this.scores['green'] / totalPoints) * 100,
+      blue: (this.scores['blue'] / totalPoints) * 100,
+    };
+  }
+  
+  sendResults() {
+    const percentages = this.calculatePercentages();
+    const data = {
+      red: percentages.red,
+      yellow: percentages.yellow,
+      green: percentages.green,
+      blue: percentages.blue
+    };
+    // Envoyer les données avec le token
+    this.test.store(data, this.token).pipe(tap({
+      next: (resp) => {
+        console.log(resp);
+        //this.handleResponse(resp.data.message);
+      }, complete: () => {
+        console.log("Observable Termite");
+      }, error: (error) => {
+        console.log(error);
+        //this.handleResponse(error);
       }
-    }
+    })).subscribe();
   }
 
-  
+  //Fonction pour afficher les messages d'erreurs
+  handleResponse<T>(responseOrError: T | HttpErrorResponse) {
+    if (responseOrError instanceof HttpErrorResponse) {
+      this.message = responseOrError.error.data.message;
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: this.message,
+        timer: 1500
+      });
+    } else {
+      const response = responseOrError as Model<Data>;
+      this.message = response.data.message;
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: this.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  }
 }
 
 

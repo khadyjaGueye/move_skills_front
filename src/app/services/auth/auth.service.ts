@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { User, UserAuth } from '../../interfaces/model';
+import { Data, Model, UserAuth, UserInfo } from '../../interfaces/model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment.development';
 })
 export class AuthService implements OnInit {
 
-  authenticatedUser: User | undefined;
+  authenticatedUser: UserInfo | undefined;
 
   constructor(private http: HttpClient) { }
 
@@ -17,9 +17,12 @@ export class AuthService implements OnInit {
 
   }
 
-  login(user: User): Observable<UserAuth> {
-    const url = `${environment.apiBaseUrl}/login`;
-    return this.http.post<UserAuth>(url, user);
+  login(user: UserInfo): Observable<Model<Data>> {
+   // const url = `${environment.apiBaseUrl}/login`;
+    //https://moovskil.tucamarketing.com/api/register
+     const url = "https://moovskil.tucamarketing.com/api/login";
+   // const url= "http://127.0.0.1:8000/api/login";
+    return this.http.post<Model<Data>>(url, user);
   }
 
   logout(id: number) {
@@ -27,7 +30,7 @@ export class AuthService implements OnInit {
     return this.http.get(url);
   }
 
-  public authentificateUser(user: User, token: string): Observable<boolean> {
+  public authentificateUser(user: UserInfo, token: string): Observable<boolean> {
     this.authenticatedUser = user;
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token)

@@ -1,115 +1,53 @@
-<!-- Button to trigger modal -->
-<button type="button"
-  class="py-2.5 px-1 me-2 mb-1 bg-[#114C5A] text-sm font-medium text-white focus:outline-none rounded-lg border border-[#EF7743] hover:bg-[#EF7743] hover:text-[#114C5A]"
-  data-modal-toggle="createParcoursModal">+ Créer parcours</button>
-
-<!-- Modal -->
-<div id="createParcoursModal" class=" fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white rounded-lg shadow-lg p-6">
-
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-semibold"></h2>
-      <button class="text-gray-500 hover:text-gray-700" data-modal-toggle="createParcoursModal">&times;</button>
-    </div>
-    <h1 class="text-center text-xl font-semibold">Information générales</h1>
+<!-- start: Sidebar -->
 
 
-    <!-- Form for creating parcours -->
-    <form>
-      <div class="items-center border-b border-gray-400 py-2">
-        <label for="" class="uppercase">Nom du Parcours De Foramtion</label>
-        <input
-          class="appearance-none bg-transparent border-none w-full text-gray-500 mr-3 py-1 px-2 leading-tight focus:outline-none"
-          type="text" placeholder="Nom de la formation" aria-label="Full name">
-      </div>
-      <div class="flex gap-5 mt-5">
+<!-- end: Sidebar -->
 
-        <div class="flex gap-1">
-          <label class="uppercase text-slate-600 font-semibold">Type</label>
-          <div class="inline-flex items-center">
-            <label class="relative flex items-center cursor-pointer" for="html-custom-icon">
-              <input name="framework-custom-icon" type="radio"
-                class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
-                id="html-custom-icon" checked />
-            </label>
-            <label class="ml-2 text-slate-600 cursor-pointer text-sm" for="html-custom-icon">
-              Graduit
-            </label>
-          </div>
-          <div class="inline-flex items-center">
-            <label class="relative flex items-center cursor-pointer" for="react-custom-icon">
-              <input name="framework-custom-icon" type="radio"
-                class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
-                id="react-custom-icon" />
-            </label>
-            <label class="ml-2 text-slate-600 cursor-pointer text-sm" for="react-custom-icon">
-              Permium
-            </label>
-          </div>
-        </div>
-        <div class="flex gap-1 ml-30">
-          <label class="uppercase text-slate-600 font-semibold">Audience</label>
-          <div class="inline-flex items-center">
-            <label class="relative flex items-center cursor-pointer" for="html-custom-icon">
-              <input name="framework-custom-icon" type="radio"
-                class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
-                id="html-custom-icon" checked />
-            </label>
-            <label class="ml-2 text-slate-600 cursor-pointer text-sm" for="html-custom-icon">
-              Public
-            </label>
-          </div>
-          <div class="inline-flex items-center">
-            <label class="relative flex items-center cursor-pointer" for="react-custom-icon">
-              <input name="framework-custom-icon" type="radio"
-                class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
-                id="react-custom-icon" />
-            </label>
-            <label class="ml-2 text-slate-600 cursor-pointer text-sm" for="react-custom-icon">
-              Privée
-            </label>
-          </div>
-        </div>
+<!-- start: Main -->
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
 
-        <div class="items-center border-b border-gray-400 py-2 ml-60">
-          <label for="" class="uppercase">Durée(jours)</label>
-          <input
-            class="appearance-none bg-transparent border-none w-full text-gray-500  leading-tight focus:outline-none"
-            type="text" placeholder="10" aria-label="Full name">
-        </div>
-
-      </div>
-
-      <div class="items-center border-b border-gray-400 py-2">
-        <label for="" class="uppercase">Ojectif de la formation</label>
-        <input
-          class="appearance-none bg-transparent border-none w-full text-gray-500 mr-3 py-1 px-2 leading-tight focus:outline-none"
-          type="text" placeholder="Renseigner l'objectif de la formation" aria-label="Full name">
-      </div>
-      <!-- Section des compétences sélectionnées -->
-      <h2 class="mt-8 text-lg font-bold">Compétences sélectionnées</h2>
-      <div class="flex flex-wrap gap-4 mt-4">
-        <div *ngFor="let selected of selectedSkills"
-          class="card w-40 bg-blue-100 p-4 text-center shadow-md rounded-md relative">
-          <p>{{ selected.name }}</p>
-          <button class="absolute top-1 right-1 text-red-500" (click)="removeSkill(selected)">✕</button>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-4 mt-5">
-        <!-- Liste des compétences -->
-        <div *ngFor="let skill of skills" class="card w-40 h-15 bg-gray-100 p-4 text-center shadow-md rounded-md">
-          <p (click)="selectSkill(skill)">{{ skill.name}}</p>
-        </div>
-      </div>
-
-
-
-
-      <div class="flex justify-center">
-        <!-- <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded-md mr-2"
-          data-modal-toggle="createParcoursModal">Annuler</button> -->
-        <button type="submit" class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md mt-5">Suivant</button>
-      </div>
-    </form>
+  <div class="py-2 px-6 h-20 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+    <div class="flex items-center text-xl ml-4">Mes parcours</div>
   </div>
-</div>
+
+  <div class="container mx-auto mt-10">
+    <h1 class="text-3xl font-bold mb-8 text-[#114C5A] text-center">Mes Contenus</h1>
+
+    <!-- Section Vidéos -->
+    <div class="mb-10">
+      <h2 class="text-2xl font-semibold text-[#EF7743] mb-4">Vidéos</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let video of videos">
+          <h3 class="font-bold mb-2 text-center">{{ video.name }}</h3>
+          <video [src]="video.url" controls class="w-full h-48 bg-black"></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Documents -->
+    <div class="mb-10">
+      <h2 class="text-2xl font-semibold text-[#EF7743] mb-4">Documents</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let document of documents">
+          <div class="p-4 border rounded-lg shadow-lg bg-white">
+            <h3 class="font-bold mb-2">{{ document.name }}</h3>
+            <p class="text-gray-600">Format : {{ document.type }}</p>
+            <a [href]="document.url" target="_blank" class="text-blue-500 underline">Ouvrir le document</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Articles et Liens externes -->
+    <div>
+      <h2 class="text-2xl font-semibold text-[#EF7743] mb-4">Liens Externes et Articles</h2>
+      <ul class="list-disc pl-5">
+        <li *ngFor="let link of externalLinks" class="mb-2">
+          <a [href]="link.url" target="_blank" class="text-blue-500 underline">{{ link.name }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+<!-- end: Main -->

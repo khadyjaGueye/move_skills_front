@@ -6,14 +6,14 @@
   </a>
   <ul class="mt-20 gap-8">
     <li class="mb-1 group active">
-      <a href="#"
-        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-[#EF7743] rounded-md group-[.active]:bg-[#EF7743] group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+      <a *ngIf="role== 'admin'" routerLinkActive="group-[.active]:bg-[#EF7743]"
+        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md  group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
         <i class="ri-home-2-line mr-3 text-lg"></i>
         <span class="text-xl">Tableau de bord</span>
       </a>
     </li>
     <li class="mb-1 group">
-      <a href="#"
+      <a routerLink="form" *ngIf="role== 'apprenant'" routerLinkActive="group-[.active]:bg-[#EF7743]"
         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
         <i class="ri-instance-line mr-3 text-lg"></i>
         <span class="text-xl">Formations</span>
@@ -22,7 +22,7 @@
 
     </li>
     <li class="mb-1 group">
-      <a href="#"
+      <a routerLink="list" *ngIf="role== 'apprenant'" routerLinkActive="group-[.active]:bg-[#EF7743]"
         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
         <i class="ri-flashlight-line mr-3 text-lg"></i>
         <span class="text-xl">Parcours</span>
@@ -30,14 +30,14 @@
       </a>
     </li>
     <li class="mb-1 group">
-      <a href="#"
+      <a *ngIf="role== 'client'" routerLinkActive="group-[.active]:bg-[#EF7743]"
         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
         <i class="ri-settings-2-line mr-3 text-lg"></i>
         <span class="text-xl">Clients</span>
       </a>
     </li>
     <li class="mb-1 group">
-      <a href="#"
+      <a *ngIf="role== 'formateur'" routerLinkActive="group-[.active]:bg-[#EF7743]"
         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
         <i class="ri-settings-2-line mr-3 text-lg"></i>
         <span class="text-xl">Ventes</span>
@@ -46,7 +46,7 @@
   </ul>
   <ul class="mt-96">
     <li class="mb-1 group">
-      <a href="#"
+      <a
         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 hover:text-gray-800" fill="none"
           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -62,12 +62,3 @@
 
 <!-- end: Sidebar -->
 
-<!-- start: Main -->
-<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-
-  <div class="py-2 px-6 h-20 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
-    <div class="flex items-center text-xl ml-4">Mes parcours</div>
-
-  </div>
-</main>
-<!-- end: Main -->

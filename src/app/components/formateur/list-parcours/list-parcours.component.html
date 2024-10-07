@@ -1,77 +1,13 @@
-<!-- start: Sidebar -->
-<div class="fixed left-0 top-0 w-64 h-full bg-[#114C5A] p-4 z-50 sidebar-menu transition-transform">
-  <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
-    <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
-    <span class="text-lg font-bold text-white ml-3">MoveSkills</span>
-  </a>
-  <ul class="mt-20 gap-8">
-    <li class="mb-1 group active">
-      <a href="#"
-        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-[#EF7743] rounded-md group-[.active]:bg-[#EF7743] group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-        <i class="ri-home-2-line mr-3 text-lg"></i>
-        <span class="text-xl">Tableau de bord</span>
-      </a>
-    </li>
-    <li class="mb-1 group">
-      <a href="#"
-        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-        <i class="ri-instance-line mr-3 text-lg"></i>
-        <span class="text-xl">Formations</span>
-        <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-      </a>
 
-    </li>
-    <li class="mb-1 group">
-      <a href="#"
-        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
-        <i class="ri-flashlight-line mr-3 text-lg"></i>
-        <span class="text-xl">Parcours</span>
-        <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-      </a>
-    </li>
-    <li class="mb-1 group">
-      <a href="#"
-        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-        <i class="ri-settings-2-line mr-3 text-lg"></i>
-        <span class="text-xl">Clients</span>
-      </a>
-    </li>
-    <li class="mb-1 group">
-      <a href="#"
-        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-        <i class="ri-settings-2-line mr-3 text-lg"></i>
-        <span class="text-xl">Ventes</span>
-      </a>
-    </li>
-  </ul>
-  <ul class="mt-96">
-    <li class="mb-1 group">
-      <a href="#"
-        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600 hover:text-gray-800" fill="none"
-          viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 8.75a3.25 3.25 0 103.25 3.25A3.254 3.254 0 0012 8.75zM19.423 15.73a1.786 1.786 0 001.43.84h.232a1.787 1.787 0 001.657-1.7v-2.941a1.786 1.786 0 00-1.657-1.7h-.232a1.785 1.785 0 00-1.43.84l-.504.782a6.993 6.993 0 00-1.573-.918l-.008-.938a1.784 1.784 0 00-1.43-1.84V4.426a1.785 1.785 0 00-1.657-1.7H9.735a1.786 1.786 0 00-1.657 1.7v1.724a1.784 1.784 0 00-1.43 1.84v.938a6.992 6.992 0 00-1.573.918l-.504-.782a1.786 1.786 0 00-1.43-.84H3.346a1.787 1.787 0 00-1.657 1.7v2.941a1.786 1.786 0 001.657 1.7h.232a1.785 1.785 0 001.43-.84l.504-.782a6.992 6.992 0 001.573.918v.938a1.785 1.785 0 001.43 1.84v1.724a1.786 1.786 0 001.657 1.7h2.941a1.786 1.786 0 001.657-1.7v-1.724a1.785 1.785 0 001.43-1.84v-.938a6.992 6.992 0 001.573-.918l.504.782z" />
-        </svg>
-
-        <span class="text-xl">Paramétres</span>
-      </a>
-    </li>
-  </ul>
-</div>
-
-<!-- end: Sidebar -->
 
 <!-- start: Main -->
 <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
   <div class="py-2 px-6 h-20 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
     <div class="flex items-center text-xl ml-4">Mes parcours</div>
-
   </div>
   <div class="p-6 mt-10">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
       <span>Les parcours</span>
-
       <form class="max-w-md mx-auto">
         <label for="default-search"
           class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -93,6 +29,7 @@
         class="py-2.5 px-1 me-2 mb-1 bg-[#114C5A] text-sm font-medium text-white focus:outline-none rounded-lg border border-[#EF7743] hover:bg-[#EF7743] hover:text-[#114C5A] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">+
         Créer parcours</button>
     </div>
+
 
     <div class="mt-20">
       <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md w-full">
@@ -227,23 +164,21 @@
   </div>
 
 
-  <!-- !-- Modal -->
+  <!-- !-- Modal 1-->
   <div *ngIf="openModal" tabindex="-1" aria-hidden="true" id="createParcoursModal"
     class=" fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-lg p-6" *ngIf="currentStep === 1">
 
-      <div class="flex justify-between items-center mb-4">
+     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold"></h2>
-        <button class="text-red-400 hover:text-gray-700">x</button>
+        <button (click)="closeModals()" class="text-red-400 hover:text-gray-700">x</button>
       </div>
       <h1 class="text-center text-xl font-semibold">Information générales</h1>
-
-
       <!-- Form for creating parcours -->
       <form>
         <div class="items-center border-b border-gray-400 py-2">
           <label for="" class="uppercase">Nom du Parcours De Foramtion</label>
-          <input
+          <input [(ngModel)]="formData.info.nom" name="nom"
             class="appearance-none bg-transparent border-none w-full text-gray-500 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text" placeholder="Nom de la formation" aria-label="Full name">
         </div>
@@ -253,7 +188,7 @@
             <label class="uppercase text-slate-600 font-semibold">Type</label>
             <div class="inline-flex items-center">
               <label class="relative flex items-center cursor-pointer" for="html-custom-icon">
-                <input name="framework-custom-icon" type="radio"
+                <input type="radio" [(ngModel)]="formData.info.type" type="radio" name="type" value="Gratuit"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="html-custom-icon" checked />
               </label>
@@ -263,7 +198,7 @@
             </div>
             <div class="inline-flex items-center">
               <label class="relative flex items-center cursor-pointer" for="react-custom-icon">
-                <input name="framework-custom-icon" type="radio"
+                <input [(ngModel)]="formData.info.type" type="radio" name="type" value="Premium"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="react-custom-icon" />
               </label>
@@ -276,7 +211,7 @@
             <label class="uppercase text-slate-600 font-semibold">Audience</label>
             <div class="inline-flex items-center">
               <label class="relative flex items-center cursor-pointer" for="html-custom-icon">
-                <input name="framework-custom-icon" type="radio"
+                <input [(ngModel)]="formData.info.audience" type="radio" name="audience" value="Public"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="html-custom-icon" checked />
               </label>
@@ -288,7 +223,7 @@
               <label
                 class="relhttps://www.figma.com/design/kFSuaRPTTJVlS8LxXRKw1V/Move-Skills---Redesign?node-id=0-1&t=yze2rIcHVVsCbfzu-1ative flex items-center cursor-pointer"
                 for="react-custom-icon">
-                <input name="framework-custom-icon" type="radio"
+                <input [(ngModel)]="formData.info.audience" type="radio" name="audience" value="Privée"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="react-custom-icon" />
               </label>
@@ -300,16 +235,15 @@
 
           <div class="items-center border-b border-gray-400 py-2 ml-60">
             <label for="" class="uppercase">Durée(jours)</label>
-            <input
+            <input [(ngModel)]="formData.info.duree" name="duree"
               class="appearance-none bg-transparent border-none w-full text-gray-500  leading-tight focus:outline-none"
               type="text" placeholder="10" aria-label="Full name">
           </div>
-
         </div>
 
         <div class="items-center border-b border-gray-400 py-2">
           <label for="" class="uppercase">Ojectif de la formation</label>
-          <input
+          <input [(ngModel)]="formData.info.objectif" name="objectif"
             class="appearance-none bg-transparent border-none w-full text-gray-500 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text" placeholder="Renseigner l'objectif de la formation" aria-label="Full name">
         </div>
@@ -329,7 +263,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <button (click)="nextStep()" type="submit"
+          <button (click)="store(); nextStep()" type="submit"
             class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md mt-5">Suivant</button>
         </div>
       </form>
@@ -338,9 +272,145 @@
 
   <!-- Modal 2 (Step 2) -->
   <div class="flex gap-4 mt-4">
+    <div *ngIf="currentStep === 2" tabindex="-1" aria-hidden="true" id="modalStep2"
+      class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Étape 2: Ajoutez un contenu</h2>
+          <button class="text-red-400 hover:text-gray-700" (click)="closeModals()">x</button>
+        </div>
+        <div class="w-[90%] mx-auto ">
+          <div class="bg-[#2C7C7933] border-dashed border-2 border-gray-500 shadow-md shadow-black/5 p-6 rounded-md">
+            <span class="text-[#2C7C79]" *ngIf="!selectedFiles.length">Aucun contenu</span>
+            <ng-container *ngFor="let file of selectedFiles">
+              <ng-container *ngIf="file.type.startsWith('video/')">
+                <h3 class="font-bold">{{ file.name }}</h3> <!-- Afficher le nom du fichier -->
+                <video [src]="file.url" controls class="max-w-[100px] h-auto"></video>
+              </ng-container>
+              <ng-container
+                *ngIf="file.type.startsWith('application/pdf') || file.type.startsWith('application/msword') || file.type.startsWith('application/vnd.openxmlformats-officedocument.wordprocessingml.document')">
+                <h3 class="font-bold" >{{ file.name }}</h3>
+                <a [href]="file.url" target="_blank" class="text-blue-500">Ouvrir le document</a>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
 
+        <div class="flex gap-4 mt-5">
+          <label class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79] cursor-pointer">
+            Vidéo
+            <input type="file" [(ngModel)]="formData.content.video" (change)="onFilesSelected($event, 'video')" accept="video/*" multiple class="hidden">
+          </label>
+          <label class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79] cursor-pointer">
+            Document
+            <input type="file" [(ngModel)]="formData.content.document" (change)="onFilesSelected($event, 'document')" accept=".pdf,.doc,.docx" multiple
+              class="hidden">
+          </label>
+        </div>
+
+        <!-- Boutons "Précédent" et "Suivant" -->
+        <div class="mt-4 flex justify-between">
+          <button (click)="previousStep()" class="px-4 py-2 bg-gray-500 text-white rounded-md">Précédent</button>
+          <button (click)="store(); nextStep()" class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md">Suivant</button>
+        </div>
+      </div>
+    </div>
   </div>
 
+
+  <!-- Modal 2 (Step 2) -->
+  <!-- <div class="flex gap-4 mt-4">
+    <div *ngIf="currentStep === 2" tabindex="-1" aria-hidden="true" id="modalStep2"
+      class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Étape 2: Ajoutez un contenu</h2>
+          <button class="text-red-400 hover:text-gray-700" (click)="closeModals()">x</button>
+        </div>
+        <div class="w-[90%] mx-auto ">
+          <div class="bg-[#2C7C7933] border-dashed border-2 border-gray-500 shadow-md shadow-black/5 p-6 rounded-md">
+            <span class="text-[#2C7C79]">Aucun contenu</span>
+          </div>
+        </div>
+
+        <div class="flex gap-4 mt-5">
+          <button class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79]">Vidéo</button>
+          <button class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79]">Image</button>
+          <button class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79]">Document</button>
+          <button class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79]">Article</button>
+          <button class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79]">Lien Interne</button>
+        </div>
+
+
+        <div class="mt-4 flex justify-between">
+          <button (click)="previousStep()" class="px-4 py-2 bg-gray-500 text-white rounded-md">Précédent</button>
+          <button (click)="nextStep()" class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md">Suivant</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Modal Étape 3 -->
+  <div *ngIf="currentStep === 3" tabindex="-1" aria-hidden="true" id="modalStep3"
+    class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Étape 3: Confirmation</h2>
+        <button class="text-red-400 hover:text-gray-700" (click)="closeModals()">x</button>
+      </div>
+      <!-- Contenu de confirmation -->
+      <p class="mb-4">Merci d'avoir rempli les étapes. Confirmez vos choix.</p>
+
+
+      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Ordre
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Libelle
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Formateur
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Retirer de mon parcour
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let selected of selectedSkills; let i = index">
+            <tr>
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{i+1}}
+              </th>
+              <td class="px-6 py-4">
+                Formation Leadership
+              </td>
+              <td class="px-6 py-4">
+                Roland Kyedrebeogo
+              </td>
+              <td class="px-6 py-4 rounded-cell">
+                {{selected.name}}
+                <!-- Bouton pour retirer l'élément -->
+                <button (click)="removeSkillTab(i)" class="text-red-500 hover:text-red-700">
+                  ✕
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <!-- Boutons "Précédent" et "Fermer" -->
+      <div class="mt-4 flex justify-between">
+        <button (click)="previousStep()" class="px-4 py-2 bg-gray-500 text-white rounded-md">Précédent</button>
+        <button (click)="closeModals()" class="px-4 py-2 bg-[#114C5A] text-white rounded-md">Terminer</button>
+      </div>
+    </div>
+  </div>
 
 </main>
 <!-- end: Main -->

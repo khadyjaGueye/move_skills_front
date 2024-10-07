@@ -1,4 +1,4 @@
 export const environment = {
-  apiBaseUrl:"http://localhost:8000/api",
+  apiBaseUrl:"https://moovskil.tucamarketing.com/api/",
   photo:"/assets/images/logo.png"
 };

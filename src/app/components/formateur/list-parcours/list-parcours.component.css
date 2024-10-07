@@ -39,3 +39,40 @@ button:hover {
 .text-red-500 {
   color: #f87171;
 }
+
+img {
+  max-width: 100px; /* Taille maximale pour les images */
+  height: auto; /* Conserve les proportions */
+}
+
+video {
+  max-width: 100px; /* Taille maximale pour les vidéos */
+  height: auto; /* Conserve les proportions */
+}
+.rounded-cell {
+  border-radius: 50px; /* Ajustez la valeur selon vos besoins */
+  background-color: white; /* Couleur de fond si nécessaire */
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #e2e8f0; /* Couleur par défaut */
+  color: #4a5568;
+  margin-right: 10px;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.active-step {
+  background-color: #114C5A; /* Couleur de l'étape active */
+  color: white;
+  border-color: #114C5A;
+}
+
+
