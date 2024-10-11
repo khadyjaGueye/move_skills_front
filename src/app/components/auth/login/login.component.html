@@ -3,8 +3,6 @@
     <div class="container mx-auto w-full max-w-lg h-96 p-6 bg-white rounded-lg shadow-lg">
       <h2 class="text-2xl font-bold text-center mb-6">Connexion</h2>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-
-        <!-- Champ Email -->
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
           <input
@@ -17,8 +15,6 @@
             Veuillez entrer un email valide.
           </div>
         </div>
-
-        <!-- Champ Mot de Passe -->
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
           <input
@@ -31,8 +27,6 @@
             Le mot de passe doit comporter au moins 6 caractères.
           </div>
         </div>
-
-        <!-- Bouton de connexion -->
         <div class="flex justify-center">
           <button
             type="submit" (click)="connecter()"
@@ -44,7 +38,32 @@
       </form>
 
       <div class="mt-6 text-center">
-        <p class="text-sm">Vous n'avez pas de compte ? <a routerLink="/inscription" class="text-blue-500 font-semibold">Inscrivez-vous ici</a></p>
+        <p class="text-sm">Vous n'avez pas de compte ?</p>
+        <a  routerLink="inscription" class="text-blue-500 font-semibold">Inscrivez-vous ici</a>
       </div>
     </div>
   </div>
+
+  <!-- <div class="container bg-color">
+    <div class="login-box bg-gradient-to-r from-[#114C5A] to-[#EF7743]">
+      <img src="assets/images/mov.jpg" class="rounded-full" />
+      <h2>Connexion</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <input type="email" formControlName="email" placeholder="Entrez votre email" />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500 text-sm">
+          Veuillez entrer un email valide.
+        </div>
+        <input type="password" placeholder="Entrez votre mot de passe" formControlName="password" />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-500 text-sm">
+          Le mot de passe doit comporter au moins 6 caractères.
+        </div>
+        <button class="" (click)="connecter()" [disabled]="loginForm.invalid">Connecter</button>
+      </form>
+      <br />
+      <a href="#">Forgot Password?</a>
+      <div class="mt-6 text-center">
+        <p class="text-sm">Vous n'avez pas de compte ? <a routerLink="/inscription" class="text-blue-500 font-semibold">Inscrivez-vous ici</a></p>
+      </div>
+    </div>
+  </div> -->
+

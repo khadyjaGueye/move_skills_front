@@ -1,5 +1,10 @@
+
+body.modal-open {
+  overflow: hidden;
+}
+
 .container {
-  padding: 20px;
+  padding: 5px;
 }
 
 h1 {
@@ -54,6 +59,7 @@ h2 {
     blue 75% 100% /* Bleu */
   );
   margin-top: 20px;
+
 }
 
 .circle-container {
@@ -136,4 +142,29 @@ h2 {
 .icon-bottom-left {
   bottom: -80px;
   left: -80px;
+}
+.circle-container {body.modal-open {
+  overflow: hidden;
+}
+
+  position: relative; /* Assure que les images soient positionnées par rapport à cette div */
+  width: 200px; /* Ajustez la taille selon vos besoins */
+  height: 200px; /* Ajustez la taille selon vos besoins */
+}
+
+.color-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Pour un cercle */
+  /* Les couleurs sont définies par getCircleStyle() */
+}
+
+.animal-icon {
+  width: 40px; /* Ajustez la taille de l'image selon vos besoins */
+  height: 40px; /* Ajustez la taille de l'image selon vos besoins */
+  object-fit: cover; /* Pour s'assurer que l'image s'adapte sans déformation */
+  margin: 10px; /* Ajoute un espace autour de l'image */
+}
+body.modal-open {
+  overflow: hidden;
 }

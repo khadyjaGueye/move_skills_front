@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -36,18 +36,20 @@ export class LoginComponent implements OnInit {
       console.log('Formulaire invalide, veuillez vérifier les erreurs.');
     }
   }
+
   connecter() {
     let userLog = this.loginForm.value;
-    console.log(userLog);
     return this.authService.login(userLog).subscribe(resp => {
       if (resp.data.status_code) {
         let tocken = resp.data.token;
         let user = resp.data.userInfo;
         this.authService.authentificateUser(user, tocken).subscribe(rep => {
           if (user.role == "apprenant") {
-            this.router.navigateByUrl("app");
+            this.router.navigateByUrl("app/form");
           } if (user.role == "superviseur") {
             this.router.navigateByUrl("/sup");
+          }if (user.role == "formateur") {
+            this.router.navigateByUrl("formateur/list");
           }
         })
       } else {

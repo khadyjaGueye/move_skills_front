@@ -122,6 +122,11 @@ export class FormComponent implements OnInit {
       ]
     },
   ];
+  role: string = "";
+  userId!:number;
+  nom!: string;
+  prenom!: string;
+  email!: string;
 
   currentIndex: number = 1;
   totalColors: { [key: string]: number } = { red: 0, green: 0, blue: 0, yellow: 0 };
@@ -136,6 +141,8 @@ export class FormComponent implements OnInit {
   displayColorCharacteristics: boolean = false;
   showResultsModal: boolean = false; // Indicateur pour afficher la modal
   message: string = "";
+  diplayButton: boolean = true;
+  dominantColor: string = ''; // Variable pour stocker la couleur dominante
   // Scores pour chaque couleur
   scores: { [key: string]: number } = {
     red: 0,
@@ -151,6 +158,20 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem("token")!;
+      // Récupérer l'utilisateur JSON
+      const userJson = localStorage.getItem('user');
+      if (userJson != null) {
+        // Parse seulement si non null
+        const user = JSON.parse(userJson);
+        this.userId = user.id;
+        this.nom = user.name;
+        this.prenom = user.prenom;
+        this.email = user.email;
+        this.role = user.role;
+        this
+      } else {
+        // Gérer le cas où pas d'utilisateur authentifié
+      }
   }
 
   openModal() {
@@ -160,8 +181,19 @@ export class FormComponent implements OnInit {
 
   // Fermer la modal
   closeModal() {
-    this.showResultsModal = false;
-    this.displayColorCharacteristics = true;
+    console.log("eeeeeeeeeeeeeeeeeeeee");
+
+    this.open = false;
+  }
+  displayCom: boolean = false
+  openModalComm() {
+    this.displayCom = true;
+  }
+  closeCom() {
+    this.displayCom = false
+  }
+  closeButtonEnvoyer() {
+    this.diplayButton = false;
   }
 
   // Fonction pour démarrer le test
@@ -169,6 +201,12 @@ export class FormComponent implements OnInit {
     this.testStarted = true; // Change l'état pour afficher le test
   }
 
+  testTerminer: boolean = true; // La variable qui contrôle l'affichage du test
+  // Méthode pour fermer le test
+  closeTest() {
+    this.testStarted = false;
+    this.displayColorCharacteristics = true;
+  }
 
   // Fonction pour soumettre la réponse sélectionnée
   submitAnswer(points: number, answer: Answer) {
@@ -188,6 +226,24 @@ export class FormComponent implements OnInit {
       } else {
         this.showResultsModal = true; // Afficher la modal avec les résultats
       }
+    }
+    // Quand toutes les questions sont répondues, calculez la couleur dominante
+    if (this.currentQuestionIndex === this.questions.length - 1) {
+      this.calculateDominantColor();
+    }
+  }
+
+  calculateDominantColor() {
+    const scores = this.scores;
+    const maxScore = Math.max(scores['red'], scores['yellow'], scores['green'], scores['blue']);
+    if (maxScore === scores['red']) {
+      this.dominantColor = 'red';
+    } else if (maxScore === scores['yellow']) {
+      this.dominantColor = 'yellow';
+    } else if (maxScore === scores['green']) {
+      this.dominantColor = 'green';
+    } else if (maxScore === scores['blue']) {
+      this.dominantColor = 'blue';
     }
   }
 
@@ -214,22 +270,33 @@ export class FormComponent implements OnInit {
 
   //afficher le cercle et ces couleurs
   getCircleStyle() {
-    const totalPoints = this.scores['red'] + this.scores['yellow'] + this.scores['green'] + this.scores['blue'];
-    // Calcule les pourcentages basés sur les scores respectifs
-    const redPercentage = (this.scores['red'] / totalPoints) * 100;
-    const yellowPercentage = (this.scores['yellow'] / totalPoints) * 100;
-    const greenPercentage = (this.scores['green'] / totalPoints) * 100;
-    const bluePercentage = (this.scores['blue'] / totalPoints) * 100;
-    // Retourne les styles pour `conic-gradient`
     return {
       'background': `conic-gradient(
-      red 0% ${redPercentage}%,
-      yellow ${redPercentage}% ${redPercentage + yellowPercentage}%,
-      green ${redPercentage + yellowPercentage}% ${redPercentage + yellowPercentage + greenPercentage}%,
-      blue ${redPercentage + yellowPercentage + greenPercentage}% 100%
-    )`
+        red 0% 25%,
+        yellow 25% 50%,
+        green 50% 75%,
+        blue 75% 100%
+      )`
     };
   }
+
+  // getCircleStyle() {
+  //   const totalPoints = this.scores['red'] + this.scores['yellow'] + this.scores['green'] + this.scores['blue'];
+  //   // Calcule les pourcentages basés sur les scores respectifs
+  //   const redPercentage = (this.scores['red'] / totalPoints) * 100;
+  //   const yellowPercentage = (this.scores['yellow'] / totalPoints) * 100;
+  //   const greenPercentage = (this.scores['green'] / totalPoints) * 100;
+  //   const bluePercentage = (this.scores['blue'] / totalPoints) * 100;
+  //   // Retourne les styles pour `conic-gradient`
+  //   return {
+  //     'background': `conic-gradient(
+  //     red 0% ${redPercentage}%,
+  //     yellow ${redPercentage}% ${redPercentage + yellowPercentage}%,
+  //     green ${redPercentage + yellowPercentage}% ${redPercentage + yellowPercentage + greenPercentage}%,
+  //     blue ${redPercentage + yellowPercentage + greenPercentage}% 100%
+  //   )`
+  //   };
+  // }
 
   // Style pour afficher le nom de la couleur sur le disque
   getColorLabelStyle(color: string, label: string) {
@@ -250,7 +317,7 @@ export class FormComponent implements OnInit {
       blue: (this.scores['blue'] / totalPoints) * 100,
     };
   }
-  
+
   sendResults() {
     const percentages = this.calculatePercentages();
     const data = {
@@ -293,6 +360,19 @@ export class FormComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       });
+    }
+  }
+
+  // Méthode pour aller à la question suivante
+  nextQuestion() {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+    }
+  }
+  // Méthode pour revenir à la question précédente
+  previousQuestion() {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
     }
   }
 }

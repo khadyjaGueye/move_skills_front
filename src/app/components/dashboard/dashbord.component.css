@@ -1,0 +1,10 @@
+.router-active{
+  background-color: #EF7743;
+}
+.animal-icon {
+  width: 40px; /* Ajustez la taille de l'image selon vos besoins */
+  height: 40px; /* Ajustez la taille de l'image selon vos besoins */
+  object-fit: cover; /* Pour s'assurer que l'image s'adapte sans déformation */
+  margin: 10px; /* Ajoute un espace autour de l'image */
+  color: white;
+}

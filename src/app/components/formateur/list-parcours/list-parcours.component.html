@@ -1,5 +1,3 @@
-
-
 <!-- start: Main -->
 <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
   <div class="py-2 px-6 h-20 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
@@ -24,7 +22,6 @@
             placeholder="Rechercher un parcours" required />
         </div>
       </form>
-
       <button type="button" (click)="openModalParcour()" data-modal-target="authentication-modal"
         class="py-2.5 px-1 me-2 mb-1 bg-[#114C5A] text-sm font-medium text-white focus:outline-none rounded-lg border border-[#EF7743] hover:bg-[#EF7743] hover:text-[#114C5A] focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">+
         Créer parcours</button>
@@ -44,9 +41,6 @@
                   class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">
                   Audience</th>
                 <th
-                  class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">
-                  Type</th>
-                <th
                   class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">
                   Prix(fcfa)</th>
                 <th
@@ -55,106 +49,34 @@
                 <th
                   class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left rounded-tr-md rounded-br-md">
                   Durée</th>
+                <th
+                  class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 bg-gray-50 text-left">
+                  Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="py-2 px-4 border-b border-b-gray-50">azertyuio</td>
+              <tr *ngFor="let parcour of parcours">
+                <td class="py-2 px-4 border-b border-b-gray-50">{{parcour.nom_parcour}}</td>
                 <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">public</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">Gratuit</span>
+                  <span class="text-[13px] font-medium text-gray-400">Graduit</span>
                 </td>
                 <td class="py-2 px-4 border-b border-b-gray-50">
                   <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    9900</span>
+                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">{{parcour.prix}}</span>
                 </td>
                 <td class="py-2 px-4 border-b border-b-gray-50">
                   <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    90</span>
+                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">90</span>
                 </td>
                 <td class="py-2 px-4 border-b border-b-gray-50">
                   <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    10 jours</span>
+                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">{{parcour.duree}}jours</span>
+                </td>
+                <td class="py-2 px-4 border-b border-b-gray-50">
+                  <button  type="submit" (click)="addVideo(parcour.id)"
+                  class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md mt-5">+</button>
                 </td>
               </tr>
-              <tr>
-                <td class="py-2 px-4 border-b border-b-gray-50">azertyuio</td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">public</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">Gratuit</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    9900</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    90</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    10 jours</span>
-                </td>
-              </tr>
-              <tr>
-                <td class="py-2 px-4 border-b border-b-gray-50">azertyuio</td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">public</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">Gratuit</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    9900</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    90</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    10 jours</span>
-                </td>
-              </tr>
-              <tr>
-                <td class="py-2 px-4 border-b border-b-gray-50">azertyuio</td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">public</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span class="text-[13px] font-medium text-gray-400">Gratuit</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    9900</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    90</span>
-                </td>
-                <td class="py-2 px-4 border-b border-b-gray-50">
-                  <span
-                    class="inline-block p-1 rounded bg-emerald-500/10 text-emerald-500 font-medium text-[12px] leading-none">In
-                    10 jours</span>
-                </td>
-              </tr>
-
               <!-- Add more rows as needed -->
             </tbody>
           </table>
@@ -169,7 +91,7 @@
     class=" fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-lg p-6" *ngIf="currentStep === 1">
 
-     <div class="flex justify-between items-center mb-4">
+      <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold"></h2>
         <button (click)="closeModals()" class="text-red-400 hover:text-gray-700">x</button>
       </div>
@@ -178,7 +100,7 @@
       <form>
         <div class="items-center border-b border-gray-400 py-2">
           <label for="" class="uppercase">Nom du Parcours De Foramtion</label>
-          <input [(ngModel)]="formData.info.nom" name="nom"
+          <input [(ngModel)]="formData.info.nom_parcour" name="nom"
             class="appearance-none bg-transparent border-none w-full text-gray-500 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text" placeholder="Nom de la formation" aria-label="Full name">
         </div>
@@ -188,7 +110,7 @@
             <label class="uppercase text-slate-600 font-semibold">Type</label>
             <div class="inline-flex items-center">
               <label class="relative flex items-center cursor-pointer" for="html-custom-icon">
-                <input type="radio" [(ngModel)]="formData.info.type" type="radio" name="type" value="Gratuit"
+                <input type="radio" [(ngModel)]="formData.info.status_type" type="radio" name="type" value="Gratuit"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="html-custom-icon" checked />
               </label>
@@ -198,7 +120,7 @@
             </div>
             <div class="inline-flex items-center">
               <label class="relative flex items-center cursor-pointer" for="react-custom-icon">
-                <input [(ngModel)]="formData.info.type" type="radio" name="type" value="Premium"
+                <input [(ngModel)]="formData.info.status_type" type="radio" name="type" value="Premium"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="react-custom-icon" />
               </label>
@@ -211,7 +133,7 @@
             <label class="uppercase text-slate-600 font-semibold">Audience</label>
             <div class="inline-flex items-center">
               <label class="relative flex items-center cursor-pointer" for="html-custom-icon">
-                <input [(ngModel)]="formData.info.audience" type="radio" name="audience" value="Public"
+                <input [(ngModel)]="formData.info.status_audiance" type="radio" name="audience" value="Public"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="html-custom-icon" checked />
               </label>
@@ -223,7 +145,7 @@
               <label
                 class="relhttps://www.figma.com/design/kFSuaRPTTJVlS8LxXRKw1V/Move-Skills---Redesign?node-id=0-1&t=yze2rIcHVVsCbfzu-1ative flex items-center cursor-pointer"
                 for="react-custom-icon">
-                <input [(ngModel)]="formData.info.audience" type="radio" name="audience" value="Privée"
+                <input [(ngModel)]="formData.info.status_audiance" type="radio" name="audience" value="Privée"
                   class="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-800 transition-all"
                   id="react-custom-icon" />
               </label>
@@ -237,7 +159,7 @@
             <label for="" class="uppercase">Durée(jours)</label>
             <input [(ngModel)]="formData.info.duree" name="duree"
               class="appearance-none bg-transparent border-none w-full text-gray-500  leading-tight focus:outline-none"
-              type="text" placeholder="10" aria-label="Full name">
+              type="number" placeholder="10" aria-label="Full name">
           </div>
         </div>
 
@@ -263,7 +185,7 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <button (click)="store(); nextStep()" type="submit"
+          <button (click)="submitParcours();closeModal()" type="submit"
             class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md mt-5">Suivant</button>
         </div>
       </form>
@@ -272,12 +194,12 @@
 
   <!-- Modal 2 (Step 2) -->
   <div class="flex gap-4 mt-4">
-    <div *ngIf="currentStep === 2" tabindex="-1" aria-hidden="true" id="modalStep2"
+    <div *ngIf="displayVideo" tabindex="-1" aria-hidden="true" id="modalStep2"
       class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="flex justify-between items-center mb-4">
           <h2 class="text-xl font-semibold">Étape 2: Ajoutez un contenu</h2>
-          <button class="text-red-400 hover:text-gray-700" (click)="closeModals()">x</button>
+          <button class="text-red-400 hover:text-gray-700" (click)="closeModalVideo()">x</button>
         </div>
         <div class="w-[90%] mx-auto ">
           <div class="bg-[#2C7C7933] border-dashed border-2 border-gray-500 shadow-md shadow-black/5 p-6 rounded-md">
@@ -289,7 +211,7 @@
               </ng-container>
               <ng-container
                 *ngIf="file.type.startsWith('application/pdf') || file.type.startsWith('application/msword') || file.type.startsWith('application/vnd.openxmlformats-officedocument.wordprocessingml.document')">
-                <h3 class="font-bold" >{{ file.name }}</h3>
+                <h3 class="font-bold">{{ file.name }}</h3>
                 <a [href]="file.url" target="_blank" class="text-blue-500">Ouvrir le document</a>
               </ng-container>
             </ng-container>
@@ -299,19 +221,21 @@
         <div class="flex gap-4 mt-5">
           <label class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79] cursor-pointer">
             Vidéo
-            <input type="file" [(ngModel)]="formData.content.video" (change)="onFilesSelected($event, 'video')" accept="video/*" multiple class="hidden">
+            <input type="file" [(ngModel)]="formData.content.video" (change)="onFilesSelected($event, 'video')"
+              accept="video/*" multiple class="hidden">
           </label>
           <label class="bg-[#2C7C7933] #2C7C79 py-2 px-4 rounded hover:bg-[#F9BD4F] text-[#2C7C79] cursor-pointer">
             Document
-            <input type="file" [(ngModel)]="formData.content.document" (change)="onFilesSelected($event, 'document')" accept=".pdf,.doc,.docx" multiple
-              class="hidden">
+            <input type="file" [(ngModel)]="formData.content.document" (change)="onFilesSelected($event, 'document')"
+              accept=".pdf,.doc,.docx" multiple class="hidden">
           </label>
         </div>
 
         <!-- Boutons "Précédent" et "Suivant" -->
         <div class="mt-4 flex justify-between">
-          <button (click)="previousStep()" class="px-4 py-2 bg-gray-500 text-white rounded-md">Précédent</button>
-          <button (click)="store(); nextStep()" class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md">Suivant</button>
+          <!-- <button (click)="previousStep()" class="px-4 py-2 bg-gray-500 text-white rounded-md">Précédent</button> -->
+          <button (click)="submitVideo()"
+            class="px-4 py-2 bg-[#F9BD4F] text-white rounded-md">Envoyer</button>
         </div>
       </div>
     </div>

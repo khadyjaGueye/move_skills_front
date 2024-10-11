@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Skill, FormDataT, VideoFile } from '../../../interfaces/model';
+import { Skill, FormDataT, VideoFile, Parcour } from '../../../interfaces/model';
 import { FormateurService } from '../../../services/formateurs/formateur.service';
+import { environment } from '../../../../environments/environment.development';
+import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -15,13 +18,15 @@ import { FormateurService } from '../../../services/formateurs/formateur.service
 export class ListParcoursComponent implements OnInit {
 
   selectedSkills: Skill[] = [];// Liste des compétences sélectionnées
+  parcours: Parcour[] = [];
   selectedButton: string = '';
   openModal: boolean = false; // Contrôle de la première modal
   showSecondModal: boolean = false; // Contrôle de la deuxième modal
   currentStep: number = 1; // Étape courante du formulaire
   fileType: string | null = null; // Contient le type de fichier sélectionné
-  selectedFiles: { url: string; name: string; type: string }[] = []; // Contient les fichiers sélectionnés
+  selectedFiles: { url: any; name: string; type: string,rawFile:any }[] = []; // Contient les fichiers sélectionnés
   savedData: any = {}; // Objet pour stocker les données à chaque étape
+  displayVideo: boolean = false;
 
   tab: number = 0;
   // Liste des compétences disponibles
@@ -35,12 +40,13 @@ export class ListParcoursComponent implements OnInit {
   ];
   formData: FormDataT = {
     info: {
-      nom: '',
+      nom_parcour: '',
       objectif: '',
-      type: '',
-      audience: '',
-      duree: '',
+      status_type: 1,
+      status_audiance: 1,
+      duree: 0,
       competences: [], // Modifié pour stocker les compétences sélectionnées
+      status_disponibilite: 20
     },
     content: {
       video: [],
@@ -52,10 +58,11 @@ export class ListParcoursComponent implements OnInit {
   };
   selectedVideos: File[] = []; // Tableau pour stocker les vidéos
   selectedDocuments: File[] = []; // Tableau pour stocker l
-  constructor(private service: FormateurService) { }
+  idParcours: number  = 1; // Variable pour stocker l'ID du parcours créé
+  constructor(private service: FormateurService,private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-
+    this.getParcours()
   }
 
   // Sélectionner une compétence
@@ -82,6 +89,7 @@ export class ListParcoursComponent implements OnInit {
   closeModals() {
     this.currentStep = 1; // Fermer toutes les modals
     this.selectedFiles = []; // Réinitialiser les fichiers sélectionnés
+    this.openModal = false
   }
 
   removeSkillTab(index: number) {
@@ -109,76 +117,104 @@ export class ListParcoursComponent implements OnInit {
   onButtonClick(buttonValue: string) {
     this.selectedButton = buttonValue;
   }
+   // Sélection des fichiers
+   onFilesSelected(event: any, type: string) {
+    const files = event.target.files;
+    console.log(files);
+
+    for (const file of files) {
+      const fileUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file));
+      this.selectedFiles.push({
+        name: file.name,
+        url: fileUrl,
+        type: file.type,
+        rawFile: file
+      });
+    }
+  }
 
   // Fonction appelée lorsque l'utilisateur sélectionne des fichiers
-  onFilesSelected(event: Event, type: string) {
-    const fileInput = event.target as HTMLInputElement;
-    const files = fileInput.files;
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.selectedFiles.push({ url: reader.result as string, name: file.name, type: file.type }); // Ajout du fichier à la liste
-        };
-        reader.readAsDataURL(file); // Lecture du fichier comme URL
-      }
-    }
+  // onFilesSelected(event: Event, type: string) {
+  //   const fileInput = event.target as HTMLInputElement;
+  //   const files = fileInput.files;
+  //   if (files) {
+  //     for (let i = 0; i < files.length; i++) {
+  //       const file = files[i];
+  //       const reader = new FileReader();
+  //       reader.onload = () => {
+  //         this.selectedFiles.push({ url: reader.result as string, name: file.name, type: file.type }); // Ajout du fichier à la liste
+  //       };
+  //       reader.readAsDataURL(file); // Lecture du fichier comme URL
+  //     }
+  //   }
+  // }
+  // Soumettre les données du parcours
+  // submitParcours() {
+  //   this.service.url = environment.apiBaseUrl + "parcours";
+  //   // Créer un objet avec les données à sauvegarder
+  //   this.savedData = {
+  //     ...this.savedData,
+  //     info: {
+  //       nom_parcour: this.formData.info.nom_parcour,
+  //       status_type: 1,
+  //       status_audiance: 1,
+  //       status_disponibilite: 20,
+  //       duree: this.formData.info.duree,
+  //       objectif: this.formData.info.objectif,
+  //       competences: this.selectedSkills.map(skill => skill.id) // Récupérer les IDs des compétences sélectionnées
+  //     }
+  //   };
+  //   console.log(this.savedData);
+  //   // Appeler le service pour envoyer les données
+  //   this.service.store(this.savedData).subscribe(response => {
+  //     console.log('Parcours créé avec succès', response);
+  //   }, error => {
+  //     console.error('Erreur lors de la création du parcours', error);
+  //   });
+  // }
+  submitParcours() {
+    this.service.url = environment.apiBaseUrl + "parcours";
+    // Modifier la valeur de l'audience avant d'envoyer les données
+    //const audienceValue = this.formData.info.audience === 'Public' ? 0 : 1;
+    // Créer un objet avec les données à sauvegarder
+    this.savedData = {
+      nom_parcour: this.formData.info.nom_parcour,
+      prix: 1000, // Exemple d'ajustement pour le prix si applicable
+      duree: this.formData.info.duree,
+      status_type: 1, // Supposons que 'Gratuit' = 0 et 'Premium' = 1
+      status_audiance: 1,
+      status_disponibilite: 20, // Valeur d'exemple, ajustez selon vos besoins
+      competences: this.selectedSkills.map(skill => skill.id)
+    };
+    //console.log(this.savedData);
+
+    // Appeler le service pour envoyer les données
+    this.service.store(this.savedData).subscribe(response => {
+      console.log('Parcours créé avec succès', response);
+      // this.idParcours = response.data.parcour.id ?? null;  // Stocker l'ID du parcours
+      // console.log(this.idParcours);
+
+    }, error => {
+      console.error('Erreur lors de la création du parcours', error);
+    });
   }
+
+
 
   // Méthode pour stocker les données par étape
-  store() {
-    if (this.currentStep === 1) {
-      // Stocker les données de la première étape (Info)
-      this.savedData = {
-        ...this.savedData,
-        info: {
-          nom: this.formData.info.nom,
-          type: this.formData.info.type,
-          audience: this.formData.info.audience,
-          duree: this.formData.info.duree,
-          objectif: this.formData.info.objectif,
-          competences: this.selectedSkills.map(skill => skill.id)
-        }
-      };
-      console.log('Données Info enregistrées :', this.savedData.info);
-      this.nextStep();
 
-    } else if (this.currentStep === 2) {
-      // Stocker les données de la deuxième étape (Contenu)
-      this.savedData = {
-        ...this.savedData,
-        content: {
-          // Stocker les données de la deuxième étape (Vidéos/Documents)
-          videos : this.selectedVideos.map(video => video), // Récupérer les vidéos sélectionnées
-          documents : this.selectedDocuments.map(document => document) // Récupérer les documents sélectionnés
-        }
-      };
-      console.log('Données Contenu enregistrées :', this.savedData.content);
-      this.nextStep();
+  addVideo(idParcour:number) {
+    console.log(idParcour);
+    this.displayVideo = true
 
-    } else if (this.currentStep === 3) {
-      // Stocker les données de la troisième étape (Résumé)
-      this.savedData = {
-        ...this.savedData,
-        summary: {
-          // Résumé de la troisième étape, par exemple :
-          resumeFinal: this.formData.summary.confirmation
-        }
-      };
-      console.log('Données Résumé enregistrées :', this.savedData.summary);
-
-      // Une fois toutes les étapes terminées, envoyer les données au backend
-      this.submitForm();
-    }
-  }
-
-  addVideo(video: VideoFile) {
     // Vérifie si la vidéo n'est pas déjà sélectionnée
-    if (!this.selectedVideos.includes(video)) {
-      this.selectedVideos.push(video);
-    }
-    console.log('Vidéos sélectionnées :', this.selectedVideos);
+    // if (!this.selectedVideos.includes(video)) {
+    //   this.selectedVideos.push(video);
+    // }
+    // console.log('Vidéos sélectionnées :', this.selectedVideos);
+  }
+  closeModalVideo() {
+    this.displayVideo = false;
   }
   addDocument(document: VideoFile) {
     // Ajoute le document à la sélection si il n'est pas déjà sélectionné
@@ -207,4 +243,63 @@ export class ListParcoursComponent implements OnInit {
       this.formData.info.competences.push(skill);
     }
   }
+
+  videoFile: File | null = null; // Variable pour stocker le fichier vidéo
+
+  // Méthode pour capturer le fichier vidéo sélectionné
+  onVideoSelected(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.videoFile = event.target.files[0]; // Stocker le fichier vidéo
+    }
+  }
+
+  // Méthode pour soumettre la vidéo
+  // submitVideo() {
+  //   console.log(this.idParcours);
+  //   if (!this.idParcours || !this.videoFile) {
+  //     console.error('ID du parcours ou fichier vidéo manquant');
+  //     return;
+  //   }
+  //   const formData = new FormData();
+  //   formData.append('idParcours', this.idParcours.toString()); // Ajouter l'ID du parcours
+  //   // formData.append('nomVideo', this.formData.content.video); // Ajouter le nom de la vidéo
+  //   formData.append('video', this.videoFile); // Ajouter le fichier vidéo
+
+  //   // Appeler le service pour envoyer la vidéo
+  //   this.service.store(formData).subscribe(response => {
+  //     console.log('Vidéo créée avec succès', response);
+  //     this.closeModals(); // Fermer le modal après succès
+  //   }, error => {
+  //     console.error('Erreur lors de la création de la vidéo', error);
+  //   });
+  // }
+  // Envoi des vidéos
+  submitVideo() {
+    const videoFiles = this.selectedFiles.filter(file => file.type.startsWith('video/'));
+    const videoFormData = new FormData();
+    videoFiles.forEach(video => {
+      videoFormData.append('videos', video.rawFile); // Le fichier vidéo
+    });
+    //videoFormData.append('idParcour', this.idParcour.toString()); // ID du parcours associé
+    console.log(videoFormData);
+
+    this.service.store(videoFormData).subscribe({
+      next: (response) => {
+        Swal.fire('Succès', 'Les vidéos ont été ajoutées avec succès!', 'success');
+        this.selectedFiles = this.selectedFiles.filter(file => !file.type.startsWith('video/')); // Vider les vidéos après l'envoi
+      },
+      error: (error) => {
+        Swal.fire('Erreur', 'Échec de l\'envoi des vidéos.', 'error');
+      }
+    });
+  }
+
+  getParcours() {
+    this.service.url = environment.apiBaseUrl + "parcours";
+    this.service.all().subscribe(resp => {
+      this.parcours = resp.data.parcours
+     // console.log(this.parcours);
+    })
+  }
+
 }

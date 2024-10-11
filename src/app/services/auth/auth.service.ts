@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Data, Model, UserAuth, UserInfo } from '../../interfaces/model';
+import { Data, Model, UserInfo } from '../../interfaces/model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
@@ -18,10 +18,10 @@ export class AuthService implements OnInit {
   }
 
   login(user: UserInfo): Observable<Model<Data>> {
-   // const url = `${environment.apiBaseUrl}/login`;
+    // const url = `${environment.apiBaseUrl}/login`;
     //https://moovskil.tucamarketing.com/api/register
-     const url = "https://moovskil.tucamarketing.com/api/login";
-   // const url= "http://127.0.0.1:8000/api/login";
+    const url = "https://moovskil.tucamarketing.com/api/login";
+    //const url= "https://prod-moveskills.dev-illimitis.com/api/login";
     return this.http.post<Model<Data>>(url, user);
   }
 

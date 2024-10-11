@@ -31,11 +31,31 @@ export class ListComponent implements OnInit {
 
   documents1: ContentItem[] = [];
   videos1: ContentItem[] = [];
+  role: string = "";
+  userId!:number;
+  nom!: string;
+  prenom!: string;
+  email!: string;
+  
 
   constructor(private service: AppService) { }
 
   ngOnInit(): void {
 // this.getVideoDocument()
+  // Récupérer l'utilisateur JSON
+  const userJson = localStorage.getItem('user');
+  if (userJson != null) {
+    // Parse seulement si non null
+    const user = JSON.parse(userJson);
+    this.userId = user.id;
+    this.nom = user.name;
+    this.prenom = user.prenom;
+    this.email = user.email;
+    this.role = user.role;
+    this
+  } else {
+    // Gérer le cas où pas d'utilisateur authentifié
+  }
   }
 
   getVideoDocument() {
