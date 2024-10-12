@@ -9,7 +9,7 @@ export interface Data {
   documents: ContentItem[]
   token: string
   status_code: number
-  parcour:InfoData
+  parcour: InfoData
   parcours: Parcour[]
   status: boolean
 }
@@ -51,7 +51,8 @@ export interface UserInfo {
   password: string
   role: string
   phoneNumber: number
-  password_confirmation:string
+  password_confirmation: string
+  codeInvitation: number
 }
 
 export interface Parcour {
@@ -64,12 +65,12 @@ export interface Parcour {
   competences: Competences[];
   videos: Document[];
   documents: Document[];
-  status_type:number
-  status_audiance:number
+  status_type: number
+  status_audiance: number
 }
-export interface Competences{
-  id:number
-  nom:string
+export interface Competences {
+  id: number
+  nom: string
 }
 
 
@@ -79,14 +80,14 @@ export interface Skill {
 }
 
 export interface InfoData {
-  id?:number
+  id?: number
   nom_parcour: string;
   objectif: string;
   status_type: number;
   status_audiance: number;
   duree: number;
   competences: string[];
-  status_disponibilite:number
+  status_disponibilite: number
 }
 
 export interface ContentData {
@@ -122,7 +123,7 @@ export interface MyDocument {
   name: string;
   url: string;
 }
-export interface Role{
-  id:number
-  nom:string
+export interface Role {
+  id: number
+  nom: string
 }
