@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { ListParcoursComponent } from "./list-parcours/list-parcours.component";
 
 const routes: Routes = [
-   { path: "list", component: ListParcoursComponent },
+   { path: "", component: ListParcoursComponent },
 ];
 
 @NgModule({

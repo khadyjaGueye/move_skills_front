@@ -1,0 +1,100 @@
+<!-- start: Sidebar -->
+<div class="fixed left-0 top-0 w-64 h-full bg-[#114C5A] p-4 z-50 sidebar-menu transition-transform">
+  <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
+    <img src="assets/images/Logo.png" alt="" class="w-8 h-8 rounded object-cover">
+    <span class="text-lg font-bold text-white ml-3">MoveSkills</span>
+  </a>
+  <ul class="mt-20 gap-8">
+    <li class="mb-1 group active">
+      <a  routerLinkActive="group-[.active]:bg-[#EF7743]"
+         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md  group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <i class="ri-home-2-line mr-3 text-lg"></i>
+        <span class="text-xl">Tableau de bord</span>
+      </a>
+    </li>
+    <li class="mb-1 group">
+      <a routerLink="form" routerLinkActive="active-link"
+         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <svg class=" py-2 px-4 w-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 0 9 12 16 22 10.1667V17.5H24V9L12 2ZM3.99902 13.4905V18.0001C5.82344 20.429 8.72812 22.0001 11.9998 22.0001 15.2714 22.0001 18.1761 20.429 20.0005 18.0001L20.0001 13.4913 12.0003 18.1579 3.99902 13.4905Z"></path></svg>
+        <span class="text-xl">Formations</span>
+      </a>
+
+    </li>
+    <li class="mb-1 group">
+      <a routerLink="list" routerLinkActive="router-active"
+         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <svg class=" py-2 px-4 w-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M8 4C8 5.10457 7.10457 6 6 6 4.89543 6 4 5.10457 4 4 4 2.89543 4.89543 2 6 2 7.10457 2 8 2.89543 8 4ZM5 16V22H3V10C3 8.34315 4.34315 7 6 7 6.82059 7 7.56423 7.32946 8.10585 7.86333L10.4803 10.1057 12.7931 7.79289 14.2073 9.20711 10.5201 12.8943 9 11.4587V22H7V16H5ZM6 9C5.44772 9 5 9.44772 5 10V14H7V10C7 9.44772 6.55228 9 6 9ZM19 5H10V3H20C20.5523 3 21 3.44772 21 4V15C21 15.5523 20.5523 16 20 16H16.5758L19.3993 22H17.1889L14.3654 16H10V14H19V5Z">
+          </path>
+        </svg>
+        <span class="text-xl">Parcours</span>
+
+      </a>
+    </li>
+    <li class="mb-1 group">
+      <a  routerLinkActive="router-active"
+         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <i class="ri-settings-2-line mr-3 text-lg"></i>
+        <span class="text-xl">Clients</span>
+      </a>
+    </li>
+    <li class="mb-1 group">
+      <a  routerLinkActive="router-active"
+         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <i class="ri-settings-2-line mr-3 text-lg"></i>
+        <span class="text-xl">Ventes</span>
+      </a>
+    </li>
+    <li class="mb-1 group">
+      <a routerLinkActive="router-active"
+         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <i class="ri-settings-2-line mr-3 text-lg"></i>
+        <span class="text-xl">Ajout Parcours</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="">
+    <li class="mb-1 group">
+      <a
+        class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <svg class="py-2 px-4 w-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M8.68637 4.00008L11.293 1.39348C11.6835 1.00295 12.3167 1.00295 12.7072 1.39348L15.3138 4.00008H19.0001C19.5524 4.00008 20.0001 4.4478 20.0001 5.00008V8.68637L22.6067 11.293C22.9972 11.6835 22.9972 12.3167 22.6067 12.7072L20.0001 15.3138V19.0001C20.0001 19.5524 19.5524 20.0001 19.0001 20.0001H15.3138L12.7072 22.6067C12.3167 22.9972 11.6835 22.9972 11.293 22.6067L8.68637 20.0001H5.00008C4.4478 20.0001 4.00008 19.5524 4.00008 19.0001V15.3138L1.39348 12.7072C1.00295 12.3167 1.00295 11.6835 1.39348 11.293L4.00008 8.68637V5.00008C4.00008 4.4478 4.4478 4.00008 5.00008 4.00008H8.68637ZM6.00008 6.00008V9.5148L3.5148 12.0001L6.00008 14.4854V18.0001H9.5148L12.0001 20.4854L14.4854 18.0001H18.0001V14.4854L20.4854 12.0001L18.0001 9.5148V6.00008H14.4854L12.0001 3.5148L9.5148 6.00008H6.00008ZM12.0001 16.0001C9.79094 16.0001 8.00008 14.2092 8.00008 12.0001C8.00008 9.79094 9.79094 8.00008 12.0001 8.00008C14.2092 8.00008 16.0001 9.79094 16.0001 12.0001C16.0001 14.2092 14.2092 16.0001 12.0001 16.0001ZM12.0001 14.0001C13.1047 14.0001 14.0001 13.1047 14.0001 12.0001C14.0001 10.8955 13.1047 10.0001 12.0001 10.0001C10.8955 10.0001 10.0001 10.8955 10.0001 12.0001C10.0001 13.1047 10.8955 14.0001 12.0001 14.0001Z">
+          </path>
+        </svg>
+        <span class="text-xl">Paramétres</span>
+      </a>
+    </li>
+    <li class="mb-1 group">
+      <a
+         class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#EF7743] hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+        <svg class="py-2 px-4 w-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M4 15H6V20H18V4H6V9H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V15ZM10 11V8L15 12L10 16V13H2V11H10Z">
+          </path>
+        </svg>
+        <span class="text-xl">Déconnexion</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- end: Sidebar -->
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
+ <div class="py-2 px-6 h-20 bg-white flex justify-between items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+   <svg class="py-2 px-4 w-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+     <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+   </svg>
+   <div class="flex items-center text-xl ml-4">Mes parcours</div>
+   <div class="flex items-center gap-4">
+     <img class="w-10 h-10 rounded-full" src="assets/images/user1.jpg" alt="">
+     <div class="font-medium dark:text-white">
+       <div class="uppercase">{{"nom"}}</div>
+       <div class="text-sm text-gray-500 dark:text-gray-400">{{"role"}}</div>
+     </div>
+   </div>
+
+
+ </div>
+  <router-outlet></router-outlet>
+</main>

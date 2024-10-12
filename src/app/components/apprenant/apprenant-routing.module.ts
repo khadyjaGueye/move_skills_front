@@ -6,10 +6,11 @@ import { ListComponent } from "./list/list.component";
 import { QuizComponent } from "./quiz/quiz.component";
 
 const routes: Routes = [
-  { path: "app", component: ApprenantComponent },
+  { path: "", component: ApprenantComponent },
   { path: "form", component: FormComponent },
   { path: "list", component: ListComponent },
   { path: "quiz", component: QuizComponent },
+  {path : "**", redirectTo : ""}
 ];
 
 @NgModule({
